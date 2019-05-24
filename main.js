@@ -46,13 +46,14 @@ window.addEventListener('keydown', key => {
     if(key.keyCode === Gamedata.controls.moveDown) {
       player.y += player.top.movespeed
     }
-    if(key.keycode === Gamedata.controls.moveRight) {
+    if(key.keyCode === Gamedata.controls.moveRight) {
       player.x += player.top.movespeed
     }
     if(key.keyCode === Gamedata.controls.moveLeft) {
       player.x -= player.top.movespeed
     }
   }
+  console.log(key)
 })
 
 function draw() {
