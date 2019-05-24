@@ -11,8 +11,8 @@ class DialogueBox {
           this.elm.elt.style.width = canvas.width-43
           this.elm.elt.style.height = window.innerHeight/4
      }
-     change(text) {
-       this.elm.elt.innerText = text
+     change(t) {
+       this.content = t
      }
      toggleVisible() {
        if(this.elm.elt.style.display === 'none') {

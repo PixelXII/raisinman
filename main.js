@@ -1,4 +1,4 @@
-const gamedatauri = 'https://cdn.jsdelivr.net/gh/PixelXII/topdownRPG@master/assets/Gamedata.json'
+const gamedatauri = 'https://cdn.jsdelivr.net/gh/PixelXII/raisinman@master/assets/Gamedata.json'
 var Gamedata;
 var Dbox;
 document.body.style.margin = "5px"
@@ -20,10 +20,38 @@ async function loadGameData() {
 function setup() {
      createCanvas(window.innerWidth-10, window.innerHeight-10)
      loadGameData()
-    // Dbox = new DialogueBox('Save the princess please')
+     Dbox = new DialogueBox('Save the princess please')
      canvas.style.position = 'absolute'
 }
 
+let player = {
+  topView: true,
+  top: {
+    sprite: undefined,
+    movespeed:8,
+    x:100,
+    y:100,
+  }
+}
+
+window.addEventListener('keydown', key => {
+  if(player.topView) {
+    if(key.keyCode === Gamedata.controls.moveUp) {
+      player.top.y += movespeed
+    }
+    if(key.keyCode === Gamedata.controls.moveDown) {
+      player.top.y -= movespeed
+    }
+    if(key.keyCode === Gamedata.controls.moveLeft) {
+      player.top.x += movespeed
+    }
+    if(key.keycode === Gamedata.controls.moveRight) {
+      player.top.x -= movespeed
+    }
+  }
+})
+
 function draw() {
      background(51)
+     player.sprite = rect(player.x, player.y, 100, 100)
 }
