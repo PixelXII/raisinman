@@ -23,6 +23,7 @@ function setup() {
      loadGameData()
      Dbox = new DialogueBox('raisin man')
      canvas.style.position = 'absolute'
+     frameRate(500)
 }
 
 let player = {
@@ -34,30 +35,54 @@ let player = {
   side: {
     movespeed:10
   },
+  movespeed:8,
   x:100,
   y:100
 }
 
-window.addEventListener('keydown', key => {
-  if(player.topView) {
-    if(key.keyCode === Gamedata.controls.moveUp) {
-      player.y -= player.top.movespeed
+// window.addEventListener('keydown', key => {
+//   if(player.topView) {
+//     if(key.keyCode === Gamedata.controls.moveUp) {
+//       player.y -= player.top.movespeed
+//     }
+//     if(key.keyCode === Gamedata.controls.moveDown) {
+//       player.y += player.top.movespeed
+//     }
+//     if(key.keyCode === Gamedata.controls.moveRight) {
+//       player.x += player.top.movespeed
+//     }
+//     if(key.keyCode === Gamedata.controls.moveLeft) {
+//       player.x -= player.top.movespeed
+//     }
+//   }
+// })
+
+var keyMap = {}; // You could also use an array
+onkeydown = onkeyup = function(e){
+    e = e || event; // to deal with IE
+    keyMap[e.keyCode] = e.type == 'keydown';
+    if(keyMap[Gamedata.controls.moveLeft]) {
+      player.x -= player.movespeed
     }
-    if(key.keyCode === Gamedata.controls.moveDown) {
-      player.y += player.top.movespeed
+    if(keyMap[Gamedata.controls.moveRight]) {
+      player.x += player.movespeed
     }
-    if(key.keyCode === Gamedata.controls.moveRight) {
-      player.x += player.top.movespeed
+    if(keyMap[Gamedata.controls.moveUp]) {
+      player.y -= player.movespeed
     }
-    if(key.keyCode === Gamedata.controls.moveLeft) {
-      player.x -= player.top.movespeed
+    if(keyMap[Gamedata.controls.moveDown]) {
+      player.y += player.movespeed
     }
-  }
-  console.log(key)
-})
+}
 
 function draw() {
   background(51)
   fill('#ffffff')
   rect(player.x, player.y, 100, 100)
+
+  if(player.top) {
+    player.movespeed = player.top.movespeed
+  } else {
+    player.movespeed = player.side.movespeed
+  }
 }
