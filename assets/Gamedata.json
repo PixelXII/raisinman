@@ -5,14 +5,13 @@
           "art":"someone else",
           "music":"probably peter",
           "programming":"kia"
-     }
+     },
      "characters": {
           "main": {
                "name":null,
                "hp":100,
                "mana":100,
-               "inventory":[],
-               
+               "inventory":[]
           }
      }
 }
