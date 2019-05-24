@@ -2,9 +2,23 @@ class DialogueBox {
      constructor(content, options) {
           this.content = content
           this.options = options
-          this.p5Elm = rect(window.innerWidth-80, window.innerHeight-80)
+          this.elm = createDiv(content)
+          setInterval(() => {
+            this.elm.elt.innerHTML = this.content
+          })
+          this.elm.elt.id = 'dbox'
+          this.elm.elt.style.display = 'none'
+          this.elm.elt.style.width = canvas.width-43
+          this.elm.elt.style.height = window.innerHeight/4
      }
-     show() {
-          
+     change(text) {
+       this.elm.elt.innerText = text
+     }
+     toggleVisible() {
+       if(this.elm.elt.style.display === 'none') {
+         this.elm.elt.style.display = 'block'
+       } else {
+         this.elm.elt.style.display = 'none'
+       }
      }
 }
