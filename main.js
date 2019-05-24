@@ -40,26 +40,9 @@ let player = {
   y:100
 }
 
-// window.addEventListener('keydown', key => {
-//   if(player.topView) {
-//     if(key.keyCode === Gamedata.controls.moveUp) {
-//       player.y -= player.top.movespeed
-//     }
-//     if(key.keyCode === Gamedata.controls.moveDown) {
-//       player.y += player.top.movespeed
-//     }
-//     if(key.keyCode === Gamedata.controls.moveRight) {
-//       player.x += player.top.movespeed
-//     }
-//     if(key.keyCode === Gamedata.controls.moveLeft) {
-//       player.x -= player.top.movespeed
-//     }
-//   }
-// })
-
-var keyMap = {}; // You could also use an array
+var keyMap = {};
 onkeydown = onkeyup = function(e){
-    e = e || event; // to deal with IE
+    e = e || event;
     keyMap[e.keyCode] = e.type == 'keydown';
     if(keyMap[Gamedata.controls.moveLeft]) {
       player.x -= player.movespeed
