@@ -6,12 +6,22 @@
           "music": "probably peter",
           "programming": "kia"
      },
+     "controls": {
+          "moveUp": 38,
+          "moveDown": 40,
+          "moveLeft": 37,
+          "moveRight": 39,
+          "action1": 67,
+          "action2": 88,
+          "action3": 90
+     },
      "characters": {
           "main": {
                "name": null,
                "hp": 100,
                "mana": 100,
                "inventory": []
-          }
+          },
+          "questGiver1":
      }
 }
