@@ -1,5 +1,8 @@
+function id(e) {
+  return document.getElementById(e)
+}
 class DialogueBox {
-     constructor(content, options) {
+     constructor(content, options) { // destructured object as options
           this.content = content
           this.options = options
           this.elm = createDiv(content)
@@ -21,4 +24,30 @@ class DialogueBox {
          this.elm.elt.style.display = 'none'
        }
      }
+}
+
+class MenuElement {
+  constructor(content, func) {
+    this.content = content
+    this.func = func
+    this.div = document.createElement('div')
+    this.div.innerHTML = content
+    this.div.className = 'menuelement'
+    this.div.addEventListener('click', () => {
+      if(typeof this.func === "function") {
+        this.func()
+      }
+    })
+    id('menu-container').appendChild(this.div)
+  }
+}
+
+class Menu {
+  constructor(title, elements, items) {
+    this.title = title
+    this.titleElt = createDiv(this.title)
+    this.elts = elements
+    items.length = items.length.splice(4)
+    this.itemAmt = items.length
+  }
 }

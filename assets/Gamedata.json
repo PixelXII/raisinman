@@ -6,6 +6,11 @@
           "music": "probably peter",
           "programming": "kia"
      },
+     "menus": {
+       "active":false,
+       "pauseMenu": false,
+       "titleMenu": true
+     },
      "controls": {
           "moveUp": 38,
           "moveDown": 40,
@@ -13,7 +18,8 @@
           "moveRight": 39,
           "action1": 67,
           "action2": 88,
-          "action3": 90
+          "action3": 90,
+          "menu": 27
      },
      "characters": {
           "main": {
