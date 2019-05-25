@@ -37,7 +37,9 @@ let player = {
   },
   movespeed:8,
   x:100,
-  y:100
+  y:100,
+  w:100,
+  h:100
 }
 
 var keyMap = {};
@@ -61,7 +63,7 @@ onkeydown = onkeyup = function(e){
 function draw() {
   background(51)
   fill('#ffffff')
-  rect(player.x, player.y, 100, 100)
+  rect(player.x, player.y, player.w, player.h)
 
   if(player.top) {
     player.movespeed = player.top.movespeed
