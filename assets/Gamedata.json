@@ -7,9 +7,8 @@
           "programming": "kia"
      },
      "menus": {
-       "active":false,
-       "pauseMenu": false,
-       "titleMenu": true
+       "pause": false,
+       "title": true
      },
      "controls": {
           "moveUp": 38,

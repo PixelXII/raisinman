@@ -9,11 +9,52 @@ var Game = {
   battle: {
     opponent: undefined,
     type: undefined
-  }
+  },
+  titleMenuActive: true,
+  pauseMenuActive: false
 }
 
 function id(e) {
   return document.getElementById(e)
+}
+
+function setGameMovementKeys() {
+  var keyMap = {};
+  onkeydown = onkeyup = function(e){
+    e = e || event;
+    keyMap[e.keyCode] = e.type == 'keydown';
+    if(keyMap[Gamedata.controls.moveLeft]) {
+      player.x -= player.movespeed
+    }
+    if(keyMap[Gamedata.controls.moveRight]) {
+      player.x += player.movespeed
+    }
+    if(keyMap[Gamedata.controls.moveUp]) {
+      player.y -= player.movespeed
+    }
+    if(keyMap[Gamedata.controls.moveDown]) {
+      player.y += player.movespeed
+    }
+  }
+}
+
+function resetGameKeys() {
+  onkeydown = onkeyup = function() {} // supposed to be empty
+}
+
+function setMenuNavKeys() {
+  onkeydown = function(e) {
+    e = e || event;
+    if(e.keyCode === Gamedata.controls.moveDown) {
+      titlemenu.increaseSelection()
+    }
+    if(e.keyCode === Gamedata.controls.moveUp) {
+      titlemenu.decreaseSelection()
+    }
+    if(e.keyCode === Gamedata.controls.action1) {
+      titlemenu.useSelected()
+    }
+  }
 }
 
 const areaNames = ['starting', 'second']
@@ -35,7 +76,7 @@ async function loadGameData() {
 }
 
 async function loadArea(area) {
-  const response = await fetch(`https://cdn.jsdelivr.net/gh/PixelXII/raisinman/assets/${area}.json`)
+  const response = await fetch(`https://cdn.jsdelivr.net/gh/PixelXII/raisinman/assets/areas/${area}.json`)
   let d = await response.json().then(res => {
     console.log("area loaded from "+areaurl)
     return res
@@ -49,6 +90,8 @@ window.addEventListener('gamestart', () => {
   loop()
   canvas.style.display = 'block'
   id('menu-container').style.display = 'none'
+  Game.titleMenuActive = false
+  setGameMovementKeys()
   loadArea('starting')
 })
 
@@ -60,7 +103,7 @@ function setup() {
      Dbox = new DialogueBox('raisin man') // it works
      canvas.style.position = 'absolute'
      canvas.style.display = 'none'
-     id('menu-container').style.marginLeft = window.innerWidth/2
+     id('menu-container').style.marginLeft = window.innerWidth/2.5
      frameRate(500) // looks better with higher fps
      mainMenu()
 }
@@ -90,24 +133,6 @@ window.addEventListener('keypress', key => {
 // MOVING DIAGONALLY IS FASTER THAN MOVING NORMALLY
 // IS IT A PROBLEM? PROBABLY
 // FIX IT? PROBABLY NOT
-
-var keyMap = {};
-onkeydown = onkeyup = function(e){
-    e = e || event;
-    keyMap[e.keyCode] = e.type == 'keydown';
-    if(keyMap[Gamedata.controls.moveLeft]) {
-      player.x -= player.movespeed
-    }
-    if(keyMap[Gamedata.controls.moveRight]) {
-      player.x += player.movespeed
-    }
-    if(keyMap[Gamedata.controls.moveUp]) {
-      player.y -= player.movespeed
-    }
-    if(keyMap[Gamedata.controls.moveDown]) {
-      player.y += player.movespeed
-    }
-}
 
 function draw() { // main game loop, not active when a menu is
   background(51)
