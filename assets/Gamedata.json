@@ -10,6 +10,10 @@
        "pause": false,
        "title": true
      },
+     "defaultOptions": {
+       "sound":true,
+       "music":true
+     },
      "controls": {
           "moveUp": 38,
           "moveDown": 40,
