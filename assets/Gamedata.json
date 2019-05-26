@@ -6,10 +6,6 @@
           "music": "probably peter",
           "programming": "kia"
      },
-     "menus": {
-       "pause": false,
-       "title": true
-     },
      "defaultOptions": {
        "sound":true,
        "music":true
