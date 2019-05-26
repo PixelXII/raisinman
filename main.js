@@ -10,6 +10,8 @@ var Game = {
     opponent: undefined,
     type: undefined
   },
+  sound: null,
+  music: null,
   titleMenuActive: true,
   pauseMenuActive: false
 }
@@ -42,33 +44,38 @@ function resetGameKeys() {
   onkeydown = onkeyup = function() {} // supposed to be empty
 }
 
-function setMenuNavKeys() {
+function setMenuNavKeys(menu) {
   onkeydown = function(e) {
     e = e || event;
     if(e.keyCode === Gamedata.controls.moveDown) {
-      titlemenu.increaseSelection()
+      menu.increaseSelection()
     }
     if(e.keyCode === Gamedata.controls.moveUp) {
-      titlemenu.decreaseSelection()
+      menu.decreaseSelection()
     }
     if(e.keyCode === Gamedata.controls.action1) {
-      titlemenu.useSelected()
+      menu.useSelected()
     }
   }
 }
 
 const areaNames = ['starting', 'second']
 
-const gamedatauri = 'https://cdn.jsdelivr.net/gh/PixelXII/raisinman/assets/Gamedata.json'
+var gdu = 'https://cdn.jsdelivr.net/gh/PixelXII/raisinman/assets/Gamedata.json'
 var Gamedata;
 var Dbox;
 document.body.style.margin = "5px"
 
 async function loadGameData() {
-     const response = await fetch(gamedatauri)
+     const response = await fetch('https://cdn.jsdelivr.net/gh/PixelXII/raisinman/assets/Gamedata.json')
      let d = await response.json().then(res => {
           console.log("Gamedata.json loaded")
-          Gamedata = res
+          if(!res) {
+            throw new Error("Could not load game data file")
+          } else {
+            Gamedata = res
+            window.dispatchEvent(events.dataLoaded)
+          }
      }).catch(err => {
           throw new Error("Could not load game data file")
           throw err
@@ -95,7 +102,18 @@ window.addEventListener('gamestart', () => {
   loadArea('starting')
 })
 
+window.addEventListener('showoptions', () => {
+  titlemenu.hide()
+  optionsmenu.show()
+  optionsmenu.items[0].select()
+})
+
 // MENUS ARE DOM ELEMENTS
+
+window.addEventListener('gamedataloaded', () => {
+  Game.sound = Gamedata.defaultOptions.sound
+  Game.music = Gamedata.defaultOptions.music
+})
 
 function setup() {
      createCanvas(window.innerWidth-10, window.innerHeight-10) // 100% responsive

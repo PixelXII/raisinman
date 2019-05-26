@@ -27,27 +27,26 @@ class DialogueBox {
 }
 
 class MenuElement {
-  constructor(content, func) {
+  constructor(content, func, defaultvalue=undefined) {
     this.content = content
     this.func = func
+    if(defaultvalue) {
+      this.value = defaultvalue
+    }
     this.selected = false
     this.div = document.createElement('div')
     this.div.innerHTML = content
     this.div.className = 'menuelement'
-    // this.div.addEventListener('click', () => {
-    //   if(typeof this.func === "function") {
-    //     this.func()
-    //   }
-    // })
-    this.div.style.display = 'none'
   }
   select() {
     this.selected = true
     this.div.style.borderColor = '#039be5'
+    this.div.style.boxShadow = '2px 2px 2px grey'
   }
   deselect() {
     this.selected = false
     this.div.style.borderColor = 'black'
+    this.div.style.boxShadow = 'none'
   }
   use() {
     this.func.call()
@@ -55,27 +54,27 @@ class MenuElement {
 }
 
 class Menu {
-  constructor(title, items) {
+  constructor(title, items, containerId) {
     this.title = createDiv(title)
     this.active = false;
-    id('menu-container').appendChild(this.title.elt)
     this.title.elt.style.fontSize = '32px'
     this.title.elt.setAttribute('align', 'center')
     this.items = items
     this.itemAmt = this.items.length
     this.currentSelection = 0
-    // setInterval(() => {
-    //   if(this.currentSelection > this.itemAmt) {
-    //     this.currentSelection = this.itemAmt
-    //     this.items[this.currentSelection].select()
-    //   }
-    // })
+    this.container = document.createElement('div')
+    this.container.className = containerId
+    this.container.appendChild(this.title.elt)
+    this.items.forEach(e => {
+      this.container.appendChild(e.div)
+    })
+    id('menu-container').appendChild(this.container)
   }
   show() {
-    this.items.forEach(a => {
-      id('menu-container').appendChild(a.div)
-      a.div.style.display = 'block'
-    })
+    this.container.style.display = 'block'
+  }
+  hide() {
+    this.container.style.display = 'none'
   }
   increaseSelection() {
     if(this.currentSelection < this.itemAmt-1) {

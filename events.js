@@ -3,5 +3,6 @@ const events = {
   playerdead: new Event('playerdead'),
   gameend: new Event('gameend'),
   showOptions: new Event('showoptions'),
-  resetKeys: new Event('resetKeys')
+  resetKeys: new Event('resetKeys'),
+  dataLoaded: new Event('gamedataloaded')
 }
