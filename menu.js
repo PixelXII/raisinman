@@ -10,6 +10,7 @@ function mainMenu() {
 
   titlemenu = new Menu("Raisin Man", [startGame, options], 'titlemenu') // main menu
   titlemenu.show()
+  titlemenu.active = true
   titlemenu.toggleActive()
   setMenuNavKeys(titlemenu)
 

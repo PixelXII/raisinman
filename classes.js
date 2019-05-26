@@ -72,9 +72,11 @@ class Menu {
   }
   show() {
     this.container.style.display = 'block'
+    this.active = true
   }
   hide() {
     this.container.style.display = 'none'
+    this.active = false
   }
   increaseSelection() {
     if(this.currentSelection < this.itemAmt-1) {

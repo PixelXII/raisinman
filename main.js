@@ -56,6 +56,15 @@ function setMenuNavKeys(menu) {
     if(e.keyCode === Gamedata.controls.action1) {
       menu.useSelected()
     }
+    if(e.keyCode === Gamedata.controls.action3) {
+      if(optionsmenu.active) {
+        optionsmenu.active = false
+        optionsmenu.hide()
+        titlemenu.active = true
+        titlemenu.show()
+        setMenuNavKeys(titlemenu)
+      }
+    }
   }
 }
 
