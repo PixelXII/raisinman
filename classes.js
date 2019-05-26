@@ -73,10 +73,15 @@ class Menu {
   show() {
     this.container.style.display = 'block'
     this.active = true
+    this.items[0].select()
+    this.currentSelection = 0
   }
   hide() {
     this.container.style.display = 'none'
     this.active = false
+    this.items.forEach(e => {
+      e.deselect()
+    })
   }
   increaseSelection() {
     if(this.currentSelection < this.itemAmt-1) {

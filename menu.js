@@ -6,7 +6,6 @@ function mainMenu() {
     resetGameKeys()
     setMenuNavKeys(optionsmenu)
   })
-  startGame.select()
 
   titlemenu = new Menu("Raisin Man", [startGame, options], 'titlemenu') // main menu
   titlemenu.show()

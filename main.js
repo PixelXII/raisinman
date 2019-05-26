@@ -114,7 +114,6 @@ window.addEventListener('gamestart', () => {
 window.addEventListener('showoptions', () => {
   titlemenu.hide()
   optionsmenu.show()
-  optionsmenu.items[0].select()
 })
 
 // MENUS ARE DOM ELEMENTS
