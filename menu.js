@@ -6,8 +6,17 @@ function mainMenu() {
     resetGameKeys()
     setMenuNavKeys(optionsmenu)
   })
-
-  titlemenu = new Menu("Raisin Man", [startGame, options], 'titlemenu') // main menu
+  let loadGame;
+  if(localStorage.savedGame) {
+    loadGame = new MenuElement('Load game', () => {
+      if(localStorage.savedGame) {
+        Game = localStorage.savedGame
+      }
+    })
+    titlemenu = new Menu("Raisin Man", [startGame, loadGame, options], 'titlemenu')
+  } else {
+    titlemenu = new Menu("Raisin Man", [startGame, options], 'titlemenu')
+  }
   titlemenu.show()
   titlemenu.active = true
   titlemenu.toggleActive()

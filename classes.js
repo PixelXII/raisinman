@@ -37,6 +37,7 @@ class MenuElement {
     this.div = document.createElement('div')
     this.div.innerHTML = content
     this.div.className = 'menuelement'
+    this.disabled = false
   }
   select() {
     this.selected = true
@@ -88,16 +89,22 @@ class Menu {
       this.items.forEach(a => {
         a.deselect()
       })
-      this.items[++this.currentSelection].select()
     }
+    if(this.items[this.currentSelection].disabled) {
+      this.currentSelection++
+    }
+    this.items[++this.currentSelection].select()
   }
   decreaseSelection() {
     if(this.currentSelection > 0) {
       this.items.forEach(a => {
         a.deselect()
       })
-      this.items[--this.currentSelection].select()
     }
+    if(this.items[this.currentSelection].disabled) {
+      this.currentSelection--
+    }
+    this.items[--this.currentSelection].select()
   }
   toggleActive() {
     if(this.active) {

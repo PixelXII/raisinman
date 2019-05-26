@@ -25,17 +25,29 @@ function setGameMovementKeys() {
   onkeydown = onkeyup = function(e){
     e = e || event;
     keyMap[e.keyCode] = e.type == 'keydown';
-    if(keyMap[Gamedata.controls.moveLeft]) {
+    // if(keyMap[Gamedata.controls.moveLeft]) {
+    //   player.x -= player.movespeed
+    // }
+    // if(keyMap[Gamedata.controls.moveRight]) {
+    //   player.x += player.movespeed
+    // }
+    // if(keyMap[Gamedata.controls.moveUp]) {
+    //   player.y -= player.movespeed
+    // }
+    // if(Gamedata.controls.moveDown) {
+    //   player.y += player.movespeed
+    // }
+    if(e.keyCode === Gamedata.controls.moveDown) {
+      player.y += player.movespeed
+    }
+    if(e.keyCode === Gamedata.controls.moveLeft) {
       player.x -= player.movespeed
     }
-    if(keyMap[Gamedata.controls.moveRight]) {
+    if(e.keyCode === Gamedata.controls.moveRight) {
       player.x += player.movespeed
     }
-    if(keyMap[Gamedata.controls.moveUp]) {
+    if(e.keyCode === Gamedata.controls.moveUp) {
       player.y -= player.movespeed
-    }
-    if(keyMap[Gamedata.controls.moveDown]) {
-      player.y += player.movespeed
     }
   }
 }
@@ -130,7 +142,7 @@ function setup() {
      canvas.style.position = 'absolute'
      canvas.style.display = 'none'
      id('menu-container').style.marginLeft = window.innerWidth/2.5
-     frameRate(500) // looks better with higher fps
+     frameRate(1500) // looks better with higher fps
      mainMenu()
 }
 
