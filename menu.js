@@ -1,3 +1,9 @@
+var menuMusic = new Audio('assets/music/raisinintro.wav')
+
+function preload() {
+  soundFormats('mp3', 'wav')
+}
+
 function mainMenu() {
   noLoop(); // menus are DOM elements, not on the p5 canvas
   let startGame = new MenuElement('Start Game', () => { window.dispatchEvent(events.gamestart) })
@@ -6,6 +12,9 @@ function mainMenu() {
     resetGameKeys()
     setMenuNavKeys(optionsmenu)
   })
+  if(Game.music) {
+    menuMusic.play()
+  }
   let loadGame;
   if(localStorage.savedGame) {
     loadGame = new MenuElement('Load game', () => {

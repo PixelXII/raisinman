@@ -1,6 +1,11 @@
 function id(e) {
   return document.getElementById(e)
 }
+var sounds = {
+  menuNav: new Audio('assets/sfx/nav.mp3'),
+  menuSelect: new Audio('assets/sfx/select.mp3')
+}
+
 class DialogueBox {
      constructor(content, options) { // destructured object as options
           this.content = content
@@ -94,6 +99,7 @@ class Menu {
       this.currentSelection++
     }
     this.items[++this.currentSelection].select()
+    sounds.menuNav.play()
   }
   decreaseSelection() {
     if(this.currentSelection > 0) {
@@ -105,6 +111,7 @@ class Menu {
       this.currentSelection--
     }
     this.items[--this.currentSelection].select()
+    sounds.menuNav.play()
   }
   toggleActive() {
     if(this.active) {
